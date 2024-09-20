@@ -1,0 +1,90 @@
+http://localhost:4004/odata/V4/CatalogService
+
+###GET Metadata
+http://localhost:4004/odata/V4/CatalogService/$metadata
+
+
+###GET Employee Data
+http://localhost:4004/odata/V4/CatalogService/EmployeeSet
+
+###GET Employee Data
+http://localhost:4004/odata/V4/CatalogService/EmployeeSet?$top=2&skip=2
+
+###GET Filtered Data
+http://localhost:4004/odata/V4/CatalogService/EmployeeSet?$filter=salaryAmount eq 5000000
+
+###GET Data by Name
+http://localhost:4004/odata/V4/CatalogService/EmployeeSet?$filter=nameFirst eq Sachin
+
+###GET Count of Data
+http://localhost:4004/odata/V4/CatalogService/EmployeeSet/$count
+
+###GET Data By Key
+http://localhost:4004/odata/V4/CatalogService/EmployeeSet/11c62eb6-3f00-42e3-883b-966744d7b4de
+
+###GET All the POS
+http://localhost:4004/odata/V4/CatalogService/POs
+
+###GET Single PO
+http://localhost:4004/odata/V4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+
+###GET All the POS & Items Including
+http://localhost:4004/odata/V4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items,PARTNER_GUID   
+
+###POST Employee Data
+POST http://localhost:4004/odata/V4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+  "nameFirst": "Salma",
+  "nameMiddle": "",
+  "nameLast": "Singh",
+  "nameInitials": null,
+  "sex": "F",
+  "language": "E",
+  "phoneNumber": "+917981622161",
+  "email": "salma.singh@gmail.com",
+  "loginName": "SALMA",
+  "Currency_code": "INR",
+  "salaryAmount": 5000000,
+  "accountNumber": "111222001",
+  "bankId": "51000065599",
+  "bankName": "HDFC BANK"
+}
+
+###PATCH Employee Data
+PATCH http://localhost:4004/odata/V4/CatalogService/EmployeeSet/11c62eb6-3f00-42e3-883b-966744d7b4de
+Content-Type: application/json
+
+{
+  "nameFirst": "Sachin",
+  "nameMiddle": "",
+  "nameLast": "Singh",
+  "nameInitials": null,
+  "sex": "M",
+  "language": "E",
+  "phoneNumber": "+917799209121",
+  "email": "sahcin.singh@gmail.com",
+  "loginName": "SACHIN",
+  "Currency_code": "INR",
+  "salaryAmount": 1000000,
+  "accountNumber": "111222999",
+  "bankId": "51000065599",
+  "bankName": "HDFC BANK"
+}
+###Delete Employee Data
+DELETE http://localhost:4004/odata/V4/CatalogService/EmployeeSet/1b6ec6d7-2be4-405a-8da2-440384896094
+
+
+###functions & Action
+###GET Single PO
+http://localhost:4004/odata/V4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/increaseAmt
+
+###GET Largest Order
+http://localhost:4004/odata/V4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/getLargestOrder()
+
+
+###CDS Based Services API
+
+###GET Employee
+http://localhost:4004/odata/V4/CDS/ReadEmployeeSrv

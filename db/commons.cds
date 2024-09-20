@@ -22,7 +22,7 @@ aspect Amount {
     TAX_AMOUNT   : AmountT @(title: 'Tax Amount');
 }
 
-type PhoneNumber : String(30) @assert.format : '^\(?([2-9][0-9]{2})\)?[-.●\s]?([2-9][0-9]{2})[-.●\s]?([0-9]{4})$';
+type PhoneNumber : String(30) @assert.format : '^(?:\+91|91)?[6-9]\d{9}$';
 type EmailAddress : String(30) @assert.format : '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
 
 aspect address {

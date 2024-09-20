@@ -6,7 +6,7 @@ using {Currency} from '@sap/cds/common';
 context  master {
     
     entity Businesspartner{
-        key NODE_KEY: common.Guid;
+        key NODE_KEY: common.Guid @title : '{i18n>PARTNER_GUID}' ;
         BP_ROLE: String(2);
         EMAIL_ADDRESS: String(105);
         PHONE_NUMBER: String(32);
@@ -14,16 +14,16 @@ context  master {
         WEB_ADDRESS: String(32);
         BP_ID: String(32);
         ADDRESS_GUID: Association to Address;
-        COMPANY_NAME: String(250);
+        COMPANY_NAME: String(250) @title : '{i18n>COMPANY_NAME}' ;
     }
 
     entity Address{
         key NODE_KEY: common.Guid;
-        CITY: String(44);
+        CITY: String(44) @title : '{i18n>CITY}' ;
         POSTAL_CODE: String(10);
         STREET: String(44);
         BUILDING: String(128);
-        COUNTRY: String(44);
+        COUNTRY: String(44)@title : '{i18n>COUNTRY}' ;
         ADDRESS_TYPE: String(44);
         VAL_START_DATE: Date;
         VAL_END_DATE: Date;
@@ -34,10 +34,10 @@ context  master {
 
     entity Product {
         key NODE_KEY: common.Guid;
-        PRODUCT_ID: String(28);
+        PRODUCT_ID: String(28) @title : '{i18n>PRODUCT_GUID}' ;
         TYPE_CODE: String(2);
         CATEGORY: String(32);
-        DESCRIPTION: localized String(255);
+        DESCRIPTION: localized String(255) @title : '{i18n>PRODUCT_NAME}' ;
         SUPPLIER_GUID: Association to master.Businesspartner;
         TAX_TARIF_CODE: Integer;
         MEASURE_UNIT:String(2);
@@ -63,26 +63,26 @@ context  master {
         Currency:Currency;
         salaryAmount: common.AmountT;
         accountNumber: String(16);
-        bankId: String(8);
+        bankId: String(80);
         bankName: String(64);
     };
 }
 
 context transaction {
 
-     entity Purchaseorder : common.Amount {
-        key NODE_KEY: common.Guid;
-        PO_ID: String(40);
+     entity Purchaseorder : cuid, common.Amount {
+        // key NODE_KEY: common.Guid @title : '{i18n>PO_KEY}' ;
+        PO_ID: String(40) @title : '{i18n>PO_ID}' ;
         PARTNER_GUID: Association to master.Businesspartner;
         LIFECYCLE_STATUS: String(1);
-        OVERALL_STATUS: String(1);
-        Items: Association to many Poitems on Items.PARENT_KEY = $self;
+        OVERALL_STATUS: String(1) @title : '{i18n>OVERALL_STATUS}' ;
+        Items: Composition of many Poitems on Items.PARENT_KEY = $self;
     }
 
-    entity Poitems : common.Amount {
-        key NODE_KEY: common.Guid;
+    entity Poitems : cuid, common.Amount {
+        // key NODE_KEY: common.Guid @title : '{i18n>PO_KEY}' ;
         PARENT_KEY: Association to Purchaseorder;
-        PO_ITEM_POS: Integer;
+        PO_ITEM_POS: Integer @title : '{i18n>PO_NO_ID}' ;
         PRODUCT_GUID: Association to master.Product;
     }
     
